@@ -2,6 +2,7 @@
 
 const path = require('path');
 const koa = require('koa');
+const cors = require('koa-cors');
 const body = require('koa-body');
 const Router = require('koa-router');
 const mount = require('koa-mount');
@@ -14,6 +15,7 @@ const port = process.env.PORT || 5000;
 console.log(`Fake Auth app will listen on port ${port}`);
 
 const app = koa();
+app.use(cors());
 
 // This is used for HTML template rendering with koa-ejs
 render(app, {
@@ -31,7 +33,7 @@ app.keys = [
 // This is the OIDC provider class
 const Provider = require('oidc-provider').Provider;
 
-const issuer = `http://localhost:${port}/op`;
+const issuer = `http://127.0.0.1:${port}/op`;
 
 // All configuration comes from here.
 // Clients and certificates are defined in ./config/clients.js and ./config/certificates.js, respectively
